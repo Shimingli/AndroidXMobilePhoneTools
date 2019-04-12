@@ -18,10 +18,34 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+        jcenter { url "http://jcenter.bintray.com/"}
+        maven { url 'https://jitpack.io' }
+        maven {
+            url "https://dl.bintray.com/shimingtongxue/maven/"
+        }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    compileSdkVersion = 28
+    buildToolsVersion = '28.0.3'
+    supportLibraryVersion = '28.0.0'
+
+    minSdkVersion = 15
+    targetSdkVersion = 28
+    versionCode = 1
+    versionName = "1.0.0"
+
+    serverAddress = "http://v.juhe.cn/todayOnhistory/"
+
+    appName="_App_VersionCode_${versionCode}_${"versionName_V"}${versionName}_${releaseTime()}.apk"
+}
+
+
+def releaseTime() {
+    return new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("GMT+08:00"))
 }
