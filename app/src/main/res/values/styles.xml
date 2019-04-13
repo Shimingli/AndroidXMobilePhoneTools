@@ -9,4 +9,8 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <declare-styleable name="ItemLayout">
+        <attr name="middleText" format="string" />
+        <attr name="MiddleIconDrawable" format="reference" />
+    </declare-styleable>
 </resources>
