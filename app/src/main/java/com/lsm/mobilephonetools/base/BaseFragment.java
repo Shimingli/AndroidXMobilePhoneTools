@@ -2,13 +2,16 @@ package com.lsm.mobilephonetools.base;
 
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.lsm.base.ui.QMUIFragment;
 import com.lsm.base.utils.QMUIDisplayHelper;
 import com.lsm.base.utils.QMUIStatusBarHelper;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import timber.log.Timber;
 
 
@@ -29,16 +32,22 @@ public abstract class BaseFragment extends QMUIFragment {
         QMUIStatusBarHelper.setStatusBarLightMode(getBaseFragmentActivity());
 
     }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView(getActivity());
+        initListener();
+    }
+
+    protected abstract void initListener();
+
+    protected abstract void initView(FragmentActivity fragmentActivity);
 
     @Override
     protected int backViewInitOffset() {
         return QMUIDisplayHelper.dp2px(getContext(), 100);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
     protected String getClassName() {
         return this.getClass().getSimpleName();
