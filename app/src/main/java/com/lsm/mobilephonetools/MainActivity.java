@@ -1,14 +1,37 @@
 package com.lsm.mobilephonetools;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import android.os.Bundle;
+import com.lsm.mobilephonetools.base.BaseFragment;
+import com.lsm.mobilephonetools.base.BaseFragmentActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseFragmentActivity {
+
+
+    private MainFragment mMainFragment;
+    @Override
+    protected int getContextViewId() {
+        return R.id.main_activity;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        if (savedInstanceState == null) {
+            BaseFragment fragment = getFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(getContextViewId(), fragment, fragment.getClass().getSimpleName())
+                    .addToBackStack(fragment.getClass().getSimpleName())
+                    .commit();
+        }
     }
+    private BaseFragment getFragment() {
+        if (mMainFragment==null) {
+            mMainFragment = new MainFragment();
+        }
+        return mMainFragment;
+    }
+
 }
